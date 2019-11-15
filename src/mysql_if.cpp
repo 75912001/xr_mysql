@@ -87,7 +87,7 @@ int xr_mysql::mysql_if_t::exec_query_sql (const char* sql, MYSQL_RES** result)
 			return SUCC;
 		}
 	}
-	return xr::ECODE::DB_SYS;
+	return xr::ERROR::DB_SYS;
 }
 
 int xr_mysql::mysql_if_t::exec_update_sql(const char* sql, int* affected_rows, int len)
@@ -140,7 +140,7 @@ int el::mysql_if_t::close_db_autocommit()
 {
 	if (SUCC != mysql_autocommit(&this->handle, 0)){
 		ALERT_LOG("db mysql_autocommit close is err [code:%d, %s]\n", this->get_errno(), this->get_error());
-		return xr::ECODE::DB_SYS;
+		return xr::ERROR_DB::SYS;
 	}
 	return SUCC;
 }
@@ -149,7 +149,7 @@ int xr_mysql::mysql_if_t::commit()
 {
 	if (SUCC != mysql_commit(&this->handle)){
 		ALERT_LOG("db mysql_commit is err [code:%d, %s]\n", this->get_errno(), this->get_error());
-		return xr::ECODE::DB_SYS;
+		return xr::ERROR_DB::SYS;
 	}
 	return SUCC;
 }
